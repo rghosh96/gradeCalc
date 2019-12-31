@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Notifications from './Notifications.js'
 
 class Dashboard extends Component {
     render() {
@@ -14,6 +15,9 @@ class Dashboard extends Component {
                     </Col>
                     <Col>
                         <p>below is a list of all the courses you entered:</p>
+                    </Col>
+                    <Col>
+                        <Notifications />
                     </Col>
                 </Row>
                 

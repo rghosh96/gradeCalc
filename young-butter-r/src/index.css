@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+p {
+  font-family: 'Raleway', sans-serif;
+}
+
 /* fonts:
 'Ubuntu Mono', monospace;
 'Raleway', sans-serif;
@@ -39,6 +43,7 @@ h1 {
 .nav-link {
   display: inline-block;
   margin-right: 15px;
+  font-family: 'Raleway', sans-serif;
 }
 
 .circle {
@@ -57,4 +62,33 @@ h1 {
 
 .navbar {
   margin: 10px;
+}
+
+.card {
+  margin: 10px;
+}
+
+.card-title {
+  font-family: 'Megrim', cursive;
+}
+
+.card-body {
+  font-family: 'Raleway', sans-serif;
+}
+
+.btn {
+  border-radius: 9px;
+  font-size: 11px;
+  padding: 7px;
+  margin: 5px;
+  font-family: 'Ubuntu Mono', monospace;
+  background-color: pink;
+}
+
+.btn-white {
+  background-color: white !important;
+}
+
+.btn-pink {
+  background-color: pink !important;
 }
