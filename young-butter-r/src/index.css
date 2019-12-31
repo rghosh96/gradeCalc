@@ -11,3 +11,50 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* fonts:
+'Ubuntu Mono', monospace;
+'Raleway', sans-serif;
+'Megrim', cursive; */
+
+h1 {
+  font-family: 'Megrim', cursive;
+}
+
+.navbar-brand {
+  font-family: 'Megrim', cursive;
+  letter-spacing: 5px;
+}
+
+.text-link {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.text-link:hover {
+  color: darkgray;
+  text-decoration: inherit;
+}
+
+.nav-link {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.circle {
+  text-decoration: none;
+  color: gray;
+  background-color: pink;
+  border-radius: 50%;
+  width: max-content;
+  padding: 10px;
+}
+
+.circle:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.navbar {
+  margin: 10px;
+}

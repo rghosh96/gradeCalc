@@ -1,10 +1,18 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter } from 'react-router-dom';
+import Navigation from './components/layout/Navigation.js'
+import Dashboard from './components/dashboard/Dashboard.js'
+
 
 function App() {
   return (
-    <div className="App">
-      <h1>grade calculator</h1>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Navigation />
+        <Dashboard />
+      </div>
+    </BrowserRouter>
   );
 }
 
