@@ -2,13 +2,17 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
 import Coursesummary from './Coursesummary.js'
-import Coursedetails from './Coursedetails.js'
 
-const Courseslist = () => {
+const Courseslist = ({ courses }) => {
     return (
         <Container>    
-                <Coursesummary />
-                <Coursedetails />
+            {/* cycle through courses if exists */}
+            { courses && courses.map(course => {
+                return (
+                    /* pass down each course into coursesummary */
+                    <Coursesummary course={ course } key={ course.id }/>
+                )
+            })}
         </Container>
     )
 }

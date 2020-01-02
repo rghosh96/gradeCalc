@@ -4,19 +4,35 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Notifications from './Notifications.js'
+import Addcourse from '../projects/Addcourse.js'
+import Courseslist from '../projects/Courseslist.js'
+// connect component to store
+import { connect } from 'react-redux'
+// connect to firestore
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
 
 class Dashboard extends Component {
     render() {
+        console.log(this.props);
+
+        // destructure props and store courses object in var called courses
+        const { courses } = this.props;
+
         return (
             <Container>
-                <Row className="d-flex align-items-center">
-                    <Col className="d-flex justify-content-center">
+                <Row className="d-flex align-items-start">
+                    <Col>
+                        <br></br>
                         <h1>your courses</h1> 
+                        <hr></hr>
+                        <Courseslist courses={ courses }/>
                     </Col>
                     <Col>
-                        <p>below is a list of all the courses you entered:</p>
+                        <Addcourse />
                     </Col>
                     <Col>
+                        <br></br>
                         <Notifications />
                     </Col>
                 </Row>
@@ -26,4 +42,18 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+// map store state to props; takes in state of store & returns object representing properties
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        // map a property called courses to the courses property in rootReducer, to its courses object
+        courses: state.firestore.ordered.courses,
+    }
+}
+
+// higher order state taking in component as parameter
+// compose higher order components (redux and firebase)
+export default compose(
+    connect(mapStateToProps), 
+    firestoreConnect(() => ['courses'])
+)(Dashboard);
