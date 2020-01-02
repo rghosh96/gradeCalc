@@ -3,7 +3,7 @@ const addBreakdown = (breakdowns) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         // make asynch call to firestore db, then carry on w dispatch
         const firestore = getFirestore();
-        firestore.collection('breakdowns').add({   // reference to courses collection! adds document to collection
+        firestore.collection('courses').doc(breakdowns.course).collection('breakdowns').add({   // reference to courses collection! adds document to collection
             ...breakdowns,                          // spread operator puts in courseName and numBreakdowns!
         }).then(() => {
             dispatch({

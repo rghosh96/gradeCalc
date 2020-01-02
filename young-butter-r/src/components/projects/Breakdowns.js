@@ -1,49 +1,59 @@
-import React, { Component } from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import React from 'react'
+import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
+import Addbreakdowns from './Addbreakdowns.js'
 
-class Breakdowns extends Component {
-    state = {
-    }
+const Breakdowns = (props) => {
+    console.log(props)
+    var breakdowns = [];
+    for (var key in props.breakdowns) {
+    breakdowns.push(props.breakdowns[key]);
+}
 
-    handleSubmit = (e) => {
-        // prevent page from refreshing
-        e.preventDefault();
-        console.log(this.state);
-    }
+    return (
+        <Container>    
+            {/* cycle through courses if exists */}
+            { breakdowns && breakdowns.map(breakdown => {
+                return (
+                    /* pass down each course into coursesummary */
+                    <div>
+                        Type: {breakdown.type} || 
+                        Percent: {breakdown.percent}
+                    </div>
+                )
+            })}
+        </Container>
+    )
+}
 
-    handleInput = (e) => {
-        this.setState ({
-            [e.target.id]: e.target.value
-        })
-    }
-
-    render() {
-        return (
-            <Container>
-                <Form onSubmit={this.handleSubmit}>
-                <Row>
-                    <Col>
-                    {/* controId sets both id and htmlFor */}
-                    <Form.Group controlId="num">
-                        <Form.Label>course name</Form.Label>
-                        <Form.Control type="text" onChange={this.handleInput} placeholder="name of course" />
-                    </Form.Group>
-                    </Col>
-                </Row>
-                <Button variant="pink" type="submit">
-                    submit!
-                </Button>
-                </Form>
-            </Container>
-        )
+const mapStateToProps = (state, ownProps) => {
+    console.log(ownProps)
+    console.log(state);
+    // identify particular course we are trying to get
+    const id = ownProps.id;
+    // get all courses from database
+    const breakdowns = state.firestore.data.breakdowns;
+    // get that particular course from db
+    const displayedBreakdowns = breakdowns ? breakdowns : null;
+    console.log(displayedBreakdowns);
+    return {
+        breakdowns: displayedBreakdowns
     }
 }
 
-
-// first param is mapStateToProps
-export default Breakdowns;
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect(props =>[   
+        {
+            collection: 'courses',
+            doc: props.id,
+            subcollections: [
+              { collection: 'breakdowns' },
+            ],
+            storeAs: 'breakdowns'
+          }
+    ])
+)(Breakdowns);

@@ -9,7 +9,9 @@ import addBreakdown from '../../store/actions/breakdownActions'
 
 class Addbreakdowns extends Component {
     state = {
-        num: null
+        type: null,
+        percent: null,
+        course: null
     }
 
     handleSubmit = (e) => {
@@ -22,7 +24,8 @@ class Addbreakdowns extends Component {
 
     handleInput = (e) => {
         this.setState ({
-            [e.target.id]: e.target.value
+            [e.target.id]: e.target.value,
+            course: this.props.id
         })
     }
 
@@ -33,7 +36,14 @@ class Addbreakdowns extends Component {
                 <Row>
                     <Col>
                     {/* controId sets both id and htmlFor */}
-                    <Form.Group controlId="num">
+                    <Form.Group controlId="type">
+                        <Form.Label>type</Form.Label>
+                        <Form.Control type="text" onChange={this.handleInput} placeholder="enter percentage" />
+                    </Form.Group>
+                    </Col>
+                    <Col>
+                    {/* controId sets both id and htmlFor */}
+                    <Form.Group controlId="percent">
                         <Form.Label>percent breakdown</Form.Label>
                         <Form.Control type="number" onChange={this.handleInput} placeholder="enter percentage" />
                     </Form.Group>

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import Addbreakdowns from './Addbreakdowns.js'
+import Breakdowns from './Breakdowns.js'
 
 const Coursedetails = (props) => {
     console.log(props);
@@ -18,8 +19,8 @@ const Coursedetails = (props) => {
                     <Card.Title> {course.courseName } </Card.Title>
                     <div><hr/></div>
                     <Card.Text>Number of breakdowns: { course.numBreakdowns }</Card.Text>
-                    <Addbreakdowns id={ id }/>
-                    <p>[ from your courses ]</p>
+                    <Addbreakdowns id={ id } number={ course.numBreakdowns }/>
+                    <Breakdowns id={ id }/>
                 </Card.Body>
             </Card>
         </Container>
@@ -27,12 +28,14 @@ const Coursedetails = (props) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
+    console.log(state)
     // identify particular course we are trying to get
     const id = ownProps.match.params.id;
     // get all courses from database
     const courses = state.firestore.data.courses;
     // get that particular course from db
     const displayedCourse = courses ? courses[id] : null;
+    // console.log(theBreakdown);
     return {
         course: displayedCourse
     }
@@ -40,5 +43,7 @@ const mapStateToProps = (state, ownProps) => {
 
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect(() => ['courses'])
+    firestoreConnect([
+        {collection: 'courses'},
+    ])
 )(Coursedetails);

@@ -1,7 +1,7 @@
 
 const initState = {
     breakdowns: [
-        {num: 1}
+        {type: quiz, percent: 20, course: os}
     ]
 };
 

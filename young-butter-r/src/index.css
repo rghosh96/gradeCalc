@@ -72,6 +72,7 @@ h1 {
   font-family: 'Ubuntu Mono', monospace !important;
   margin: 0px 0px 0px 0px !important;
   font-size: 15px !important;
+  text-align: center;
 }
 
 .card-title {
