@@ -5,20 +5,15 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { connect } from 'react-redux'
-import addCourse from '../../store/actions/courseActions'
 
-class Addcourse extends Component {
+class Breakdowns extends Component {
     state = {
-        courseName: '',
-        numBreakdowns: null
     }
 
     handleSubmit = (e) => {
         // prevent page from refreshing
         e.preventDefault();
         console.log(this.state);
-        // addCourse from actions!
-        this.props.addCourse(this.state);
     }
 
     handleInput = (e) => {
@@ -34,15 +29,9 @@ class Addcourse extends Component {
                 <Row>
                     <Col>
                     {/* controId sets both id and htmlFor */}
-                    <Form.Group controlId="courseName">
+                    <Form.Group controlId="num">
                         <Form.Label>course name</Form.Label>
                         <Form.Control type="text" onChange={this.handleInput} placeholder="name of course" />
-                    </Form.Group>
-                    </Col>
-                    <Col>
-                    <Form.Group controlId="numBreakdowns">
-                        <Form.Label># of breakdowns</Form.Label>
-                        <Form.Control type="number" min="1" max="10" onChange={this.handleInput} placeholder="enter a number" />
                     </Form.Group>
                     </Col>
                 </Row>
@@ -55,11 +44,6 @@ class Addcourse extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addCourse: (course) => dispatch(addCourse(course))
-    }
-}
 
 // first param is mapStateToProps
-export default connect(null, mapDispatchToProps)(Addcourse);
+export default Breakdowns;

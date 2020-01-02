@@ -2,17 +2,16 @@ import React from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
+import { Link } from 'react-router-dom'
 
 const Coursesummary = ({course}) => {
     return(
-        <Row>
-            <Card style={{ width: '18rem' }}>
+        <Row className="justify-content-center">
+            <Card>
                 <Card.Body>
-                    <Card.Title>{course.courseName}</Card.Title>
-                    <Card.Text>
-                    {course.numBreakdowns}
-                    </Card.Text>
-                    <Button variant="pink">Details</Button>
+                    <Link to={'/course/' + course.id} className="text-link">
+                        <div className="special">{course.courseName}</div>
+                    </Link>
                 </Card.Body>
             </Card>
         </Row>

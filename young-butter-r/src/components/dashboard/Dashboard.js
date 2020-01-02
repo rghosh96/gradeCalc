@@ -23,13 +23,17 @@ class Dashboard extends Component {
             <Container>
                 <Row className="d-flex align-items-start">
                     <Col>
-                        <br></br>
-                        <h1>your courses</h1> 
-                        <hr></hr>
-                        <Courseslist courses={ courses }/>
+                    <br></br>
+                    <h1 className="center">add course!</h1>
+                    <hr></hr>
+                        <Addcourse />
                     </Col>
                     <Col>
-                        <Addcourse />
+                        <br></br>
+                        <h1 className="center">your courses</h1> 
+                        <hr></hr>
+                        <p className="center">click on the course for more details!</p>
+                        <Courseslist courses={ courses }/>
                     </Col>
                     <Col>
                         <br></br>
