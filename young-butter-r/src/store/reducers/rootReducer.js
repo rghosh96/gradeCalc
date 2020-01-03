@@ -4,6 +4,7 @@ import courseReducer from './courseReducer'
 import { combineReducers } from 'redux'
 // premade reducer to sync firestore w our reduces
 import { firestoreReducer } from 'redux-firestore'
+// to sync authentication status
 import { firebaseReducer } from 'react-redux-firebase'
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     courses: courseReducer,
     // automatically syncs state to data in database
     firestore: firestoreReducer,
+    // syncs firebase authentication info with redux store
     firebase: firebaseReducer
 })
 
