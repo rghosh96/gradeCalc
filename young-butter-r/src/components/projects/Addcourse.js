@@ -10,7 +10,7 @@ import addCourse from '../../store/actions/courseActions'
 class Addcourse extends Component {
     state = {
         courseName: '',
-        numBreakdowns: null
+        final: null
     }
 
     handleSubmit = (e) => {
@@ -40,9 +40,9 @@ class Addcourse extends Component {
                     </Form.Group>
                     </Col>
                     <Col>
-                    <Form.Group controlId="numBreakdowns">
-                        <Form.Label># of breakdowns</Form.Label>
-                        <Form.Control type="number" min="1" max="10" onChange={this.handleInput} placeholder="enter a number" />
+                    <Form.Group controlId="final">
+                        <Form.Label>final %</Form.Label>
+                        <Form.Control type="number" onChange={this.handleInput} placeholder="enter a number" />
                     </Form.Group>
                     </Col>
                 </Row>

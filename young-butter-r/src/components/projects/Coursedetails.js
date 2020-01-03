@@ -18,7 +18,7 @@ const Coursedetails = (props) => {
                 <Card.Body>
                     <Card.Title> {course.courseName } </Card.Title>
                     <div><hr/></div>
-                    <Card.Text>Number of breakdowns: { course.numBreakdowns }</Card.Text>
+                    <Card.Text>Final percent contribution: { course.final }%</Card.Text>
                     <Addbreakdowns id={ id } number={ course.numBreakdowns }/>
                     <Breakdowns id={ id }/>
                 </Card.Body>

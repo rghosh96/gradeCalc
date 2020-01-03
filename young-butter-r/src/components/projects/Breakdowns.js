@@ -12,22 +12,27 @@ const Breakdowns = (props) => {
     for (var key in props.breakdowns) {
         breakdowns.push(props.breakdowns[key]);
     }
+    var final = props.course.final/100;
     var total = 0;
+    var pTotal = 0;
+    var mcTot = final*100;
     var A = 90;
     var B = 80;
     var C = 70;
-    for (var i in breakdowns) {
-        total = total + ((breakdowns[i].percent/100)*(breakdowns[i].score/100));
-    }
-    total = total*100
     
-    var differenceA = A - total;
-    var differenceB = B - total;
-    var differenceC = C - total;
+    console.log(final)
+    for (var i in breakdowns) {
+        console.log(mcTot)
+        pTotal = pTotal + ((breakdowns[i].percent/100));
+        total = total + ((breakdowns[i].percent/100)*(breakdowns[i].score/100));
+        mcTot = mcTot + Number(breakdowns[i].percent);
+        
+    }
 
-    var wantA = differenceA/(.2)
-    var wantB = differenceB/(.2)
-    var wantC = differenceC/(.2)
+    total = (total / pTotal)*100;
+    var wantA = (A - total * (1 - final)) / final;
+    var wantB = (B - total * (1 - final)) / final;
+    var wantC = (C - total * (1 - final)) / final;
 
     return (
         <Container>    
@@ -42,10 +47,13 @@ const Breakdowns = (props) => {
                     </div>
                 )
             })}
+            <br></br>
+            { mcTot === 100 ?  
+                <div>total: {mcTot}</div> : <div>not enough points! {mcTot}</div> }
             <div>Your current grade: { total }</div>
             <div>For an A: { wantA }</div>
-            <div>For an B: { wantB }</div>
-            <div>For an B: { wantC }</div>
+            <div>For a B: { wantB }</div>
+            <div>For a C: { wantC }</div>
         </Container>
     )
 }
@@ -57,11 +65,14 @@ const mapStateToProps = (state, ownProps) => {
     const id = ownProps.id;
     // get all courses from database
     const breakdowns = state.firestore.data.breakdowns;
+    const courses = state.firestore.data.courses;
     // get that particular course from db
+    const displayedCourse = courses ? courses[id] : null;
     const displayedBreakdowns = breakdowns ? breakdowns : null;
     console.log(displayedBreakdowns);
     return {
-        breakdowns: displayedBreakdowns
+        breakdowns: displayedBreakdowns,
+        course: displayedCourse
     }
 }
 

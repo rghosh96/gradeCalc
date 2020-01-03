@@ -11,7 +11,6 @@ class Addbreakdowns extends Component {
     state = {
         type: null,
         percent: null,
-        score: null,
         course: null
     }
 
@@ -39,21 +38,21 @@ class Addbreakdowns extends Component {
                     {/* controId sets both id and htmlFor */}
                     <Form.Group controlId="type">
                         <Form.Label>type</Form.Label>
-                        <Form.Control type="text" onChange={this.handleInput} placeholder="enter percentage" />
+                        <Form.Control type="text" onChange={this.handleInput} placeholder="grade type" />
                     </Form.Group>
                     </Col>
                     <Col>
                     {/* controId sets both id and htmlFor */}
                     <Form.Group controlId="percent">
                         <Form.Label>percent of course</Form.Label>
-                        <Form.Control type="number" onChange={this.handleInput} placeholder="enter percentage" />
+                        <Form.Control type="number" onChange={this.handleInput} placeholder="percent contribution" />
                     </Form.Group>
                     </Col>
                     <Col>
                     {/* controId sets both id and htmlFor */}
                     <Form.Group controlId="score">
                         <Form.Label>your percentage</Form.Label>
-                        <Form.Control type="number" onChange={this.handleInput} placeholder="enter percentage" />
+                        <Form.Control type="number" onChange={this.handleInput} placeholder="your current score" />
                     </Form.Group>
                     </Col>
                 </Row>
@@ -61,6 +60,7 @@ class Addbreakdowns extends Component {
                     submit!
                 </Button>
                 </Form>
+                <hr></hr>
             </Container>
         )
     }
