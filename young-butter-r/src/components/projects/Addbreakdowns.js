@@ -11,6 +11,7 @@ class Addbreakdowns extends Component {
     state = {
         type: null,
         percent: null,
+        score: null,
         course: null
     }
 
@@ -44,7 +45,14 @@ class Addbreakdowns extends Component {
                     <Col>
                     {/* controId sets both id and htmlFor */}
                     <Form.Group controlId="percent">
-                        <Form.Label>percent breakdown</Form.Label>
+                        <Form.Label>percent of course</Form.Label>
+                        <Form.Control type="number" onChange={this.handleInput} placeholder="enter percentage" />
+                    </Form.Group>
+                    </Col>
+                    <Col>
+                    {/* controId sets both id and htmlFor */}
+                    <Form.Group controlId="score">
+                        <Form.Label>your percentage</Form.Label>
                         <Form.Control type="number" onChange={this.handleInput} placeholder="enter percentage" />
                     </Form.Group>
                     </Col>

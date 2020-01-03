@@ -10,8 +10,24 @@ const Breakdowns = (props) => {
     console.log(props)
     var breakdowns = [];
     for (var key in props.breakdowns) {
-    breakdowns.push(props.breakdowns[key]);
-}
+        breakdowns.push(props.breakdowns[key]);
+    }
+    var total = 0;
+    var A = 90;
+    var B = 80;
+    var C = 70;
+    for (var i in breakdowns) {
+        total = total + ((breakdowns[i].percent/100)*(breakdowns[i].score/100));
+    }
+    total = total*100
+    
+    var differenceA = A - total;
+    var differenceB = B - total;
+    var differenceC = C - total;
+
+    var wantA = differenceA/(.2)
+    var wantB = differenceB/(.2)
+    var wantC = differenceC/(.2)
 
     return (
         <Container>    
@@ -21,10 +37,15 @@ const Breakdowns = (props) => {
                     /* pass down each course into coursesummary */
                     <div>
                         Type: {breakdown.type} || 
-                        Percent: {breakdown.percent}
+                        Percent: {breakdown.percent} || 
+                        Your Score: {breakdown.score}
                     </div>
                 )
             })}
+            <div>Your current grade: { total }</div>
+            <div>For an A: { wantA }</div>
+            <div>For an B: { wantB }</div>
+            <div>For an B: { wantC }</div>
         </Container>
     )
 }
