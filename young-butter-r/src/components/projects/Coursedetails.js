@@ -10,10 +10,11 @@ import { Redirect } from 'react-router-dom'
 
 const Coursedetails = (props) => {
     console.log(props);
+    if (!props.auth.uid) return <Redirect to ='/signin' />
     const id = props.match.params.id;
     // destructure to get data from mapStateToProps
     const { course } = props;
-    if (!props.auth.uid) return <Redirect to ='/signin' />
+    
     return (course ? (
         <Container>
             <Card>
@@ -52,6 +53,7 @@ export default compose(
     firebaseConnect(),
     firestoreConnect(props => {
         console.log(props)
+        if (props.auth.uid) {
         return [
             {
               collection: 'users',
@@ -61,5 +63,8 @@ export default compose(
               ],
               storeAs: 'userCourse'
             }
-          ]})
+          ]
+    } else {
+        return [ { collection: 'courses'}]
+    }})
 )(Coursedetails);

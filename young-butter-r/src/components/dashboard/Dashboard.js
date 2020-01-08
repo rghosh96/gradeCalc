@@ -66,6 +66,7 @@ export default compose(
     connect(mapStateToProps), firebaseConnect(),
     firestoreConnect(props => {
         console.log(props)
+        if (props.auth.uid) {
         return [
             {
               collection: 'users',
@@ -75,5 +76,9 @@ export default compose(
               ],
               storeAs: 'userCourse'
             }
-          ]})
+          ]
+    }
+else {
+    return [ { collection: 'courses'}]
+}})
 )(Dashboard);
