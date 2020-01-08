@@ -88,9 +88,10 @@ h1 {
 
 .card-body {
   font-family: 'Raleway', sans-serif;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   justify-content: center;
+  align-items:  center;
 }
 
 .btn {

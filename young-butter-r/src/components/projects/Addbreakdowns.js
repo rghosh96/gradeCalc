@@ -66,6 +66,12 @@ class Addbreakdowns extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         addBreakdown: (breakdown) => dispatch(addBreakdown(breakdown))
@@ -73,4 +79,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 // first param is mapStateToProps
-export default connect(null, mapDispatchToProps)(Addbreakdowns);
+export default connect(mapStateToProps, mapDispatchToProps)(Addbreakdowns);

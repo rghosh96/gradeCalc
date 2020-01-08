@@ -5,7 +5,8 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { connect } from 'react-redux'
-import addCourse from '../../store/actions/courseActions'
+import { addCourse } from '../../store/actions/courseActions'
+import { Redirect } from 'react-router-dom'
 
 class Addcourse extends Component {
     state = {
@@ -17,8 +18,8 @@ class Addcourse extends Component {
         // prevent page from refreshing
         e.preventDefault();
         console.log(this.state);
-        // addCourse from actions!
-        this.props.addCourse(this.state);
+        // addCourse from actions! take in user as well!
+        this.props.addCourse(this.props.auth.uid, this.state);
     }
 
     handleInput = (e) => {
@@ -28,6 +29,7 @@ class Addcourse extends Component {
     }
 
     render() {
+        if (!this.props.auth.uid) return <Redirect to ='/signin' />
         return (
             <Container>
                 <Form onSubmit={this.handleSubmit}>
@@ -55,11 +57,17 @@ class Addcourse extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
-        addCourse: (course) => dispatch(addCourse(course))
+        addCourse: (user, course) => dispatch(addCourse(user, course))
     }
 }
 
 // first param is mapStateToProps
-export default connect(null, mapDispatchToProps)(Addcourse);
+export default connect(mapStateToProps, mapDispatchToProps)(Addcourse);

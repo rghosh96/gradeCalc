@@ -8,9 +8,9 @@ import Signedinlinks from './Signedinlinks.js'
 import Signedoutlinks from './Signedoutlinks.js'
 
 const Navigation = (props) => {
-    const { auth } = props;
+    const { auth, profile } = props;
     console.log(auth)
-    const links = auth.uid ? <Signedinlinks /> : <Signedoutlinks />;
+    const links = auth.uid ? <Signedinlinks profile={ profile } /> : <Signedoutlinks />;
     return (
         <Navbar bg="light" expand="lg">
         <Navbar.Brand><Link to="/" className="text-link">grade calc</Link></Navbar.Brand>
@@ -28,7 +28,8 @@ const Navigation = (props) => {
 const mapStateToProps = (state) => {
     console.log(state)
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        profile: state.firebase.profile
     }
 }
 

@@ -17,6 +17,12 @@ const courseReducer = (state = initState, action) => {
         case 'ADD_COURSE_ERROR':
             console.log('add course error', action.error)
             return state;
+        case 'REMOVE_COURSE':
+            console.log('removed course:', action.course);
+            return state;
+        case 'REMOVE_COURSE_ERROR':
+            console.log('remove course error', action.error)
+            return state;
         default:
             return state;
     }

@@ -6,12 +6,14 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import Addbreakdowns from './Addbreakdowns.js'
 import Breakdowns from './Breakdowns.js'
+import { Redirect } from 'react-router-dom'
 
 const Coursedetails = (props) => {
     console.log(props);
     const id = props.match.params.id;
     // destructure to get data from mapStateToProps
     const { course } = props;
+    if (!props.auth.uid) return <Redirect to ='/signin' />
     return (course ? (
         <Container>
             <Card>
@@ -37,7 +39,8 @@ const mapStateToProps = (state, ownProps) => {
     const displayedCourse = courses ? courses[id] : null;
     // console.log(theBreakdown);
     return {
-        course: displayedCourse
+        course: displayedCourse,
+        auth: state.firebase.auth
     }
 }
 

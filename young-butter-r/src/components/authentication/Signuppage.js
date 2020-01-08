@@ -4,6 +4,9 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { signUp } from '../../store/actions/authActions'
 
 class Signuppage extends Component {
     state = {
@@ -17,6 +20,7 @@ class Signuppage extends Component {
         // prevent page from refreshing
         e.preventDefault();
         console.log(this.state);
+        this.props.signUp(this.state)
     }
 
     handleInput = (e) => {
@@ -26,6 +30,8 @@ class Signuppage extends Component {
     }
 
     render() {
+        console.log(this.props);
+        if (this.props.auth.uid) return <Redirect to ='/' />
         return (
             <Container>
                 <br></br>
@@ -62,9 +68,23 @@ class Signuppage extends Component {
                     log in!
                 </Button>
                 </Form>
+                <div>{ this.props.authError ? <p>{ this.props.authError }</p> : null }</div>
             </Container>
         )
     }
 }
 
-export default Signuppage;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth,
+        authError: state.authenticate.authError
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signUp: (newUser) => dispatch(signUp(newUser))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signuppage);

@@ -6,11 +6,12 @@ import { connect } from 'react-redux'
 import { logOut } from '../../store/actions/authActions'
 
 const Signedinlinks = (props) => {
+    console.log(props)
     return (
         <Nav className="ml-auto">
             <Link to="/Addcourse" className="nav-link">add course</Link>
             <a onClick={ props.logOut } className="nav-link">sign out</a>
-            <Link to="/" className="circle">RG</Link>
+            <Link to="/" className="circle">{ props.profile.initials }</Link>
         </Nav>
     );
 }

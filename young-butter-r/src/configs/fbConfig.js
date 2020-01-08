@@ -11,7 +11,9 @@ var firebaseConfig = {
     storageBucket: "young-butter-rashi-r.appspot.com",
     messagingSenderId: "141836012693",
     appId: "1:141836012693:web:7d08ef2c3f4db91cf11f9c",
-    measurementId: "G-QKKVSEJKWD"
+    measurementId: "G-QKKVSEJKWD",
+    useFirestoreForProfile: true,
+    userProfile: 'users',
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);

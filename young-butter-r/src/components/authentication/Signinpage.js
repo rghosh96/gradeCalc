@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import { connect } from 'react-redux'
 import { logIn } from '../../store/actions/authActions'
+import { Redirect } from 'react-router-dom'
 
 class Signinpage extends Component {
     state = {
@@ -25,6 +26,7 @@ class Signinpage extends Component {
     }
 
     render() {
+        if (this.props.auth.uid) return <Redirect to ='/' />
         return (
             <Container>
                 <br></br>
@@ -55,7 +57,8 @@ class Signinpage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        authError: state.authenticate.authError
+        authError: state.authenticate.authError,
+        auth: state.firebase.auth
     }
 }
 

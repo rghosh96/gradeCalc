@@ -9,16 +9,19 @@ import Courseslist from '../projects/Courseslist.js'
 // connect component to store
 import { connect } from 'react-redux'
 // connect to firestore
-import { firestoreConnect } from 'react-redux-firebase'
+import { firestoreConnect, firebaseConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+import { Redirect } from 'react-router-dom'
 
 class Dashboard extends Component {
     render() {
         console.log(this.props);
 
         // destructure props and store courses object in var called courses
-        const { courses } = this.props;
+        const { users, auth } = this.props;
 
+        // redirect if NOT logged in
+        if (!auth.uid) return <Redirect to ='/signin' />
         return (
             <Container>
                 <Row className="d-flex align-items-start">
@@ -33,7 +36,7 @@ class Dashboard extends Component {
                         <h1 className="center">your courses</h1> 
                         <hr></hr>
                         <p className="center">click on the course for more details!</p>
-                        <Courseslist courses={ courses }/>
+                        <Courseslist courses={ users }/>
                     </Col>
                     <Col>
                         <br></br>
@@ -51,13 +54,28 @@ const mapStateToProps = (state) => {
     console.log(state);
     return {
         // map a property called courses to the courses property in rootReducer, to its courses object
-        courses: state.firestore.ordered.courses,
+        users: state.firestore.ordered.courses,
+        // check if logged in
+        auth: state.firebase.auth
     }
 }
 
 // higher order state taking in component as parameter
 // compose higher order components (redux and firebase)
 export default compose(
-    connect(mapStateToProps), 
-    firestoreConnect(() => ['courses'])
+    connect(mapStateToProps), firebaseConnect(),
+    firestoreConnect(props => {
+        console.log(props)
+        return [
+            {
+              collection: 'users',
+              doc: props.auth.uid,
+              subcollections: [
+                { collection: 'courses' }
+              ]
+            },
+            {
+                collection: 'courses',
+              }
+          ]})
 )(Dashboard);
