@@ -5,6 +5,7 @@ import Coursesummary from './Coursesummary.js'
 
 
 const Courseslist = ({ courses }) => {
+    console.log(courses)
     return (
         <Container>    
             {/* cycle through courses if exists */}

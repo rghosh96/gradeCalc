@@ -7,7 +7,7 @@ import { deleteCourse } from '../../store/actions/courseActions'
 import { connect } from 'react-redux'
 
 const Coursesummary = (props) => {
-    
+    console.log(props)
     return(
         <Row className="justify-content-center">
             <Card>

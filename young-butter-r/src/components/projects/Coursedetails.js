@@ -2,7 +2,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
 import { connect } from 'react-redux'
-import { firestoreConnect } from 'react-redux-firebase'
+import { firestoreConnect, firebaseConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import Addbreakdowns from './Addbreakdowns.js'
 import Breakdowns from './Breakdowns.js'
@@ -21,8 +21,8 @@ const Coursedetails = (props) => {
                     <Card.Title> {course.courseName } </Card.Title>
                     <div><hr/></div>
                     <Card.Text>Final percent contribution: { course.final }%</Card.Text>
-                    <Addbreakdowns id={ id } number={ course.numBreakdowns }/>
-                    <Breakdowns id={ id }/>
+                    <Addbreakdowns id={ id } />
+                    <Breakdowns userId = {props.auth.uid} courseId={ id } final={ course.final }/>
                 </Card.Body>
             </Card>
         </Container>
@@ -31,10 +31,13 @@ const Coursedetails = (props) => {
 
 const mapStateToProps = (state, ownProps) => {
     console.log(state)
+    console.log(ownProps)
     // identify particular course we are trying to get
     const id = ownProps.match.params.id;
+    console.log(id)
     // get all courses from database
-    const courses = state.firestore.data.courses;
+    const courses = state.firestore.data.userCourse;
+    console.log(courses)
     // get that particular course from db
     const displayedCourse = courses ? courses[id] : null;
     // console.log(theBreakdown);
@@ -46,7 +49,17 @@ const mapStateToProps = (state, ownProps) => {
 
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect([
-        {collection: 'courses'},
-    ])
+    firebaseConnect(),
+    firestoreConnect(props => {
+        console.log(props)
+        return [
+            {
+              collection: 'users',
+              doc: props.auth.uid,
+              subcollections: [
+                { collection: 'courses' }
+              ],
+              storeAs: 'userCourse'
+            }
+          ]})
 )(Coursedetails);

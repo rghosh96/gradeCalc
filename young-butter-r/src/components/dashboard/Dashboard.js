@@ -54,7 +54,7 @@ const mapStateToProps = (state) => {
     console.log(state);
     return {
         // map a property called courses to the courses property in rootReducer, to its courses object
-        users: state.firestore.ordered.courses,
+        users: state.firestore.ordered.userCourse,
         // check if logged in
         auth: state.firebase.auth
     }
@@ -72,10 +72,8 @@ export default compose(
               doc: props.auth.uid,
               subcollections: [
                 { collection: 'courses' }
-              ]
-            },
-            {
-                collection: 'courses',
-              }
+              ],
+              storeAs: 'userCourse'
+            }
           ]})
 )(Dashboard);

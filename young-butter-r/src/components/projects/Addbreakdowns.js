@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { connect } from 'react-redux'
-import addBreakdown from '../../store/actions/breakdownActions'
+import { addBreakdown } from '../../store/actions/breakdownActions'
 
 class Addbreakdowns extends Component {
     state = {
@@ -19,7 +19,7 @@ class Addbreakdowns extends Component {
         e.preventDefault();
         console.log(this.state);
         // addCourse from actions!
-        this.props.addBreakdown(this.state);
+        this.props.addBreakdown(this.props.auth.uid, this.state);
     }
 
     handleInput = (e) => {
@@ -74,7 +74,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addBreakdown: (breakdown) => dispatch(addBreakdown(breakdown))
+        addBreakdown: (user, breakdown) => dispatch(addBreakdown(user, breakdown))
     }
 }
 

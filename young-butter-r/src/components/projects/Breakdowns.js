@@ -5,14 +5,19 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import Addbreakdowns from './Addbreakdowns.js'
+import { deleteBreakdown } from '../../store/actions/breakdownActions'
+import Button from 'react-bootstrap/Button'
 
 const Breakdowns = (props) => {
     console.log(props)
+    if (props.breakdowns) {
     var breakdowns = [];
     for (var key in props.breakdowns) {
+        if (key){
         breakdowns.push(props.breakdowns[key]);
+        }
     }
-    var final = props.course.final/100;
+    var final = props.final/100;
     var total = 0;
     var pTotal = 0;
     var mcTot = final*100;
@@ -26,24 +31,27 @@ const Breakdowns = (props) => {
         pTotal = pTotal + ((breakdowns[i].percent/100));
         total = total + ((breakdowns[i].percent/100)*(breakdowns[i].score/100));
         mcTot = mcTot + Number(breakdowns[i].percent);
-        
     }
 
     total = (total / pTotal)*100;
     var wantA = (A - total * (1 - final)) / final;
     var wantB = (B - total * (1 - final)) / final;
     var wantC = (C - total * (1 - final)) / final;
-
+    }
+    console.log(props.userId)
+    console.log(props.courseId)
     return (
         <Container>    
             {/* cycle through courses if exists */}
             { breakdowns && breakdowns.map(breakdown => {
                 return (
                     /* pass down each course into coursesummary */
-                    <div>
+                    <div key={breakdown.id}>
                         Type: {breakdown.type} || 
                         Percent: {breakdown.percent} || 
                         Your Score: {breakdown.score}
+                        { console.log(key)}
+                        <Button variant="pink" onClick={() => { props.deleteBreakdown(props.userId, props.courseId, key) }}> delete </Button>
                     </div>
                 )
             })}
@@ -62,7 +70,7 @@ const mapStateToProps = (state, ownProps) => {
     console.log(ownProps)
     console.log(state);
     // identify particular course we are trying to get
-    const id = ownProps.id;
+    const id = ownProps.courseId;
     // get all courses from database
     const breakdowns = state.firestore.data.breakdowns;
     const courses = state.firestore.data.courses;
@@ -76,16 +84,27 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteBreakdown: (user, courseId, brId) => dispatch(deleteBreakdown(user, courseId, brId))
+    }
+}
+
 export default compose(
-    connect(mapStateToProps),
-    firestoreConnect(props =>[   
+    connect(mapStateToProps,mapDispatchToProps),
+    firestoreConnect(props =>  {
+        return [
         {
-            collection: 'courses',
-            doc: props.id,
+            collection: 'users',
+            doc: props.userId,
             subcollections: [
-              { collection: 'breakdowns' },
+            { collection: 'courses',
+                doc: props.courseId,
+                subcollections: [
+                    { collection: 'breakdowns' }
+                ],
+            } 
             ],
             storeAs: 'breakdowns'
-          }
-    ])
+    }]})
 )(Breakdowns);
