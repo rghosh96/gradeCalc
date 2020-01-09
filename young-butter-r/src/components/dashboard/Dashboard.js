@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Notifications from './Notifications.js'
 import Addcourse from '../projects/Addcourse.js'
 import Courseslist from '../projects/Courseslist.js'
 // connect component to store
@@ -37,10 +36,6 @@ class Dashboard extends Component {
                         <hr></hr>
                         <p className="center">click on the course for more details!</p>
                         <Courseslist courses={ users }/>
-                    </Col>
-                    <Col>
-                        <br></br>
-                        <Notifications />
                     </Col>
                 </Row>
                 

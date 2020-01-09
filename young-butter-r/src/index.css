@@ -57,6 +57,7 @@ h1 {
   border-radius: 50%;
   width: max-content;
   padding: 10px;
+  text-transform: uppercase;
 }
 
 .circle:hover {

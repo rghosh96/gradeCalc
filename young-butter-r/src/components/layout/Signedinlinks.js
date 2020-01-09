@@ -9,7 +9,7 @@ const Signedinlinks = (props) => {
     console.log(props)
     return (
         <Nav className="ml-auto">
-            <Link to="/Addcourse" className="nav-link">add course</Link>
+            <Link to="/" className="nav-link">dashboard</Link>
             <a onClick={ props.logOut } className="nav-link">sign out</a>
             <Link to="/" className="circle">{ props.profile.initials }</Link>
         </Nav>

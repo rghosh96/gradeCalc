@@ -46,7 +46,7 @@ class Signinpage extends Component {
                     <Form.Control type="password" onChange={this.handleInput} placeholder="pls enter ur password!" />
                 </Form.Group>
                 <Button variant="pink" type="submit">
-                    log in!
+                    sign in!
                 </Button>
                 </Form>
                 <div>{ this.props.authError ? <p>{ this.props.authError }</p> : null }</div>
