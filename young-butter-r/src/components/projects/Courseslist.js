@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container'
 import Coursesummary from './Coursesummary.js'
 
 
-const Courseslist = ({ courses }) => {
+const Courseslist = ({ courses, auth }) => {
     console.log(courses)
     return (
         <Container>    
@@ -12,7 +12,7 @@ const Courseslist = ({ courses }) => {
             { courses && courses.map(course => {
                 return (
                     /* pass down each course into coursesummary */
-                    <Coursesummary course={ course } key={ course.id }/>
+                    <Coursesummary course={ course } auth ={ auth } key={ course.id }/>
                 )
             })}
         </Container>

@@ -22,12 +22,12 @@ export const addCourse = (user, course) => {
     }
 }
 
-export const deleteCourse = (id) => {
+export const deleteCourse = (user, courseId) => {
     // dispatch dispatches action to reducer; returns function and halts that dispatch
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         // make asynch call to firestore db, then carry on w dispatch
         const firestore = getFirestore();
-        firestore.collection('courses').doc(id).delete().then(() => {
+        firestore.collection('users').doc(user).collection('courses').doc(courseId).delete().then(() => {
             dispatch({
                 type: 'REMOVE_COURSE',
             });

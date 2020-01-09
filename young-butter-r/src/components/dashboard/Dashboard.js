@@ -35,7 +35,7 @@ class Dashboard extends Component {
                         <h1 className="center">your courses</h1> 
                         <hr></hr>
                         <p className="center">click on the course for more details!</p>
-                        <Courseslist courses={ users }/>
+                        <Courseslist courses={ users } auth={ auth }/>
                     </Col>
                 </Row>
                 

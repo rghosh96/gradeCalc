@@ -30,11 +30,12 @@ const Breakdowns = (props) => {
     
     console.log(final)
     for (var i in breakdowns) {
-        if (null) {continue}
+        if (!null) {
         console.log(mcTot)
         pTotal = pTotal + ((breakdowns[i].percent/100));
         total = total + ((breakdowns[i].percent/100)*(breakdowns[i].score/100));
-        mcTot = mcTot + Number(breakdowns[i].percent);
+        mcTot = mcTot + Number(breakdowns[i].percent);}
+        else {continue}
     }
 
     total = (total / pTotal)*100;

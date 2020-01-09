@@ -16,7 +16,7 @@ const Coursesummary = (props) => {
                         <div className="special">{props.course.courseName}</div>
                         <div className="special">final: {props.course.final}%</div>
                     </Link>
-                    <Button variant="simple"  onClick={() => { props.deleteCourse(props.course.id) }}>[delete]</Button>
+                    <Button variant="simple"  onClick={() => { props.deleteCourse(props.auth.uid, props.course.id) }}>[delete]</Button>
                 </Card.Body>
             </Card>
         </Row>
@@ -27,7 +27,7 @@ const Coursesummary = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteCourse: (course) => dispatch(deleteCourse(course))
+        deleteCourse: (user, course) => dispatch(deleteCourse(user, course))
     }
 }
 
