@@ -14,6 +14,7 @@ import thunk from 'redux-thunk'
 import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore'
 import { ReactReduxFirebaseProvider, getFirebase, isLoaded } from 'react-redux-firebase'
 import fbConfig from './configs/fbConfig'
+import Spinner from 'react-bootstrap/Spinner'
 
 // create a data store & pass in a reducer to manipulate states
 // apply middleware to access database asynchronously to enhance store with extra functionality
@@ -46,7 +47,15 @@ const rrfProps = {
 // to make sure authenticate before rendering to dom
 function AuthIsLoaded({ children }) {
     const auth = useSelector(state => state.firebase.auth)
-    if (!isLoaded(auth)) return <div>loading...</div>;
+    if (!isLoaded(auth)) return <div>
+          <Spinner animation="grow" variant="primary" />
+  <Spinner animation="grow" variant="secondary" />
+  <Spinner animation="grow" variant="success" />
+  <Spinner animation="grow" variant="danger" />
+  <Spinner animation="grow" variant="warning" />
+  <Spinner animation="grow" variant="info" />
+  <Spinner animation="grow" variant="dark" />
+    </div>;
     return children
 }
 

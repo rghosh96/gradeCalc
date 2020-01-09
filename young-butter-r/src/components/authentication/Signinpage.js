@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import Alert from 'react-bootstrap/Alert'
 import { connect } from 'react-redux'
 import { logIn } from '../../store/actions/authActions'
 import { Redirect } from 'react-router-dom'
@@ -49,7 +50,8 @@ class Signinpage extends Component {
                     sign in!
                 </Button>
                 </Form>
-                <div>{ this.props.authError ? <p>{ this.props.authError }</p> : null }</div>
+                <br></br>
+                <div>{ this.props.authError ? <Alert variant="danger">{ this.props.authError }</Alert> : null }</div>
             </Container>
         )
     }

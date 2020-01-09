@@ -7,6 +7,7 @@ import { compose } from 'redux'
 import Addbreakdowns from './Addbreakdowns.js'
 import Breakdowns from './Breakdowns.js'
 import { Redirect } from 'react-router-dom'
+import Spinner from 'react-bootstrap/Spinner'
 
 const Coursedetails = (props) => {
     console.log(props);
@@ -27,7 +28,15 @@ const Coursedetails = (props) => {
                 </Card.Body>
             </Card>
         </Container>
-    ) : (<p>loading le course!</p>))
+    ) : (<div>
+        <Spinner animation="grow" variant="primary" />
+<Spinner animation="grow" variant="secondary" />
+<Spinner animation="grow" variant="success" />
+<Spinner animation="grow" variant="danger" />
+<Spinner animation="grow" variant="warning" />
+<Spinner animation="grow" variant="info" />
+<Spinner animation="grow" variant="dark" />
+  </div>))
 }
 
 const mapStateToProps = (state, ownProps) => {

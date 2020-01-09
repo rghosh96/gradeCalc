@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Alert from 'react-bootstrap/Alert'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { signUp } from '../../store/actions/authActions'
@@ -68,7 +69,7 @@ class Signuppage extends Component {
                     sign up!
                 </Button>
                 </Form>
-                <div>{ this.props.authError ? <p>{ this.props.authError }</p> : null }</div>
+                <div>{ this.props.authError ? <Alert variant="danger">{ this.props.authError }</Alert> : null }</div>
             </Container>
         )
     }

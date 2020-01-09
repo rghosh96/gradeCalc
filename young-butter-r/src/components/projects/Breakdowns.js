@@ -9,6 +9,7 @@ import Addbreakdowns from './Addbreakdowns.js'
 import { deleteBreakdown } from '../../store/actions/breakdownActions'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
+import Alert from 'react-bootstrap/Alert'
 
 const Breakdowns = (props) => {
     console.log(props)
@@ -81,7 +82,11 @@ const Breakdowns = (props) => {
             <div>For a B: { wantB }</div>
             <div>For a C: { wantC }</div>
             </div> : 
-            <div>not enough points! current: {mcTot} (must be 100)</div> }
+            <div>
+            <Alert variant="danger" >
+            <b>not enough points! </b>
+            total running points for course must be out of 100. currently, it is out of only {mcTot}
+        </Alert></div> }
             
         </Container>
     )
