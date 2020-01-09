@@ -10,7 +10,7 @@ import { Redirect } from 'react-router-dom'
 
 const Coursedetails = (props) => {
     console.log(props);
-    if (!props.auth.uid) return <Redirect to ='/signin' />
+    if (!props.auth.uid) return <Redirect to ='/welcome' />
     const id = props.match.params.id;
     // destructure to get data from mapStateToProps
     const { course } = props;
@@ -20,8 +20,8 @@ const Coursedetails = (props) => {
             <Card>
                 <Card.Body>
                     <Card.Title> {course.courseName } </Card.Title>
-                    <div><hr/></div>
-                    <Card.Text>Final percent contribution: { course.final }%</Card.Text>
+                    <Card.Text>
+                    <hr></hr>Final percent contribution: { course.final }%</Card.Text>
                     <Addbreakdowns id={ id } />
                     <Breakdowns userId = {props.auth.uid} courseId={ id } final={ course.final }/>
                 </Card.Body>

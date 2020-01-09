@@ -20,7 +20,7 @@ class Dashboard extends Component {
         const { users, auth } = this.props;
 
         // redirect if NOT logged in
-        if (!auth.uid) return <Redirect to ='/signin' />
+        if (!auth.uid) return <Redirect to ='/welcome' />
         return (
             <Container>
                 <Row className="d-flex align-items-start">

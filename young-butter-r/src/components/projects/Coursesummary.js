@@ -14,8 +14,9 @@ const Coursesummary = (props) => {
                 <Card.Body>
                     <Link to={'/course/' + props.course.id} className="text-link">
                         <div className="special">{props.course.courseName}</div>
+                        <div className="special">final: {props.course.final}%</div>
                     </Link>
-                    <Button variant="pink"  onClick={() => { props.deleteCourse(props.course.id) }}>delete</Button>
+                    <Button variant="simple"  onClick={() => { props.deleteCourse(props.course.id) }}>[delete]</Button>
                 </Card.Body>
             </Card>
         </Row>

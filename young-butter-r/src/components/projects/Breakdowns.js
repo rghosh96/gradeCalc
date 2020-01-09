@@ -1,12 +1,14 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
+import ProgressBar from 'react-bootstrap/ProgressBar'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import Addbreakdowns from './Addbreakdowns.js'
 import { deleteBreakdown } from '../../store/actions/breakdownActions'
 import Button from 'react-bootstrap/Button'
+import Table from 'react-bootstrap/Table'
 
 const Breakdowns = (props) => {
     console.log(props)
@@ -27,6 +29,7 @@ const Breakdowns = (props) => {
     
     console.log(final)
     for (var i in breakdowns) {
+        if (null) {continue}
         console.log(mcTot)
         pTotal = pTotal + ((breakdowns[i].percent/100));
         total = total + ((breakdowns[i].percent/100)*(breakdowns[i].score/100));
@@ -43,25 +46,43 @@ const Breakdowns = (props) => {
     return (
         <Container>    
             {/* cycle through courses if exists */}
+            <Table responsive>
+            <thead>
+                <tr>
+                <th>Type</th>
+                <th>Percent Contribution</th>
+                <th>Your score</th>
+                <th>delete?</th>
+                </tr>
+            </thead>
+            <tbody>
             { breakdowns && breakdowns.map(breakdown => {
                 return (
                     /* pass down each course into coursesummary */
-                    <div key={breakdown.id}>
-                        Type: {breakdown.type} || 
-                        Percent: {breakdown.percent} || 
-                        Your Score: {breakdown.score}
+                    <tr key={breakdown.id}>
+                        <td>{breakdown.type} </td>
+                        <td>{breakdown.percent} </td>
+                        <td>{breakdown.score} </td>
                         { console.log(key)}
-                        <Button variant="pink" onClick={() => { props.deleteBreakdown(props.userId, props.courseId, key) }}> delete </Button>
-                    </div>
+                        <td><Button variant="simple" onClick={() => { props.deleteBreakdown(props.userId, props.courseId, key) }}> [delete] </Button></td>
+                    </tr>
                 )
             })}
+            </tbody>
+            </Table>
             <br></br>
+
             { mcTot === 100 ?  
-                <div>total: {mcTot}</div> : <div>not enough points! {mcTot}</div> }
-            <div>Your current grade: { total }</div>
+                <div>total: {mcTot}
+                <div>Your current grade: { total }
+            <ProgressBar valuemax={A} animated now={total}/>
+            </div>
             <div>For an A: { wantA }</div>
             <div>For a B: { wantB }</div>
             <div>For a C: { wantC }</div>
+            </div> : 
+            <div>not enough points! current: {mcTot} (must be 100)</div> }
+            
         </Container>
     )
 }

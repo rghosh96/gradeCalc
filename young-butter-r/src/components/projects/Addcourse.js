@@ -29,7 +29,7 @@ class Addcourse extends Component {
     }
 
     render() {
-        if (!this.props.auth.uid) return <Redirect to ='/signin' />
+        if (!this.props.auth.uid) return <Redirect to ='/welcome' />
         return (
             <Container>
                 <Form onSubmit={this.handleSubmit}>

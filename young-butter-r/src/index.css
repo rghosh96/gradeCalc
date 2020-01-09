@@ -112,7 +112,24 @@ h1 {
   background-color: pink !important;
 }
 
+.btn-simple {
+  font-family: 'Raleway', sans-serif;
+  font-size: 11px !important;
+  background-color: none !important;
+  text-transform: uppercase;
+  margin: 0px !important;
+  padding: 0px !important;
+  color: grey !important;
+}
+
+.progress-bar {
+  background-color: pink !important;
+}
+
 .center {
   text-align: center;
 }
 
+.welcome {
+  margin: 50px;
+}

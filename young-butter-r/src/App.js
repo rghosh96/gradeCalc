@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Navigation from './components/layout/Navigation.js'
 import Dashboard from './components/dashboard/Dashboard.js'
+import Welcome from './components/dashboard/Welcome.js'
 import Courseslist from './components/projects/Courseslist.js'
 import Coursedetails from './components/projects/Coursedetails.js'
 import Signinpage from './components/authentication/Signinpage.js'
@@ -21,6 +22,7 @@ function App() {
           <Route path='/signup' component={Signuppage} />
           <Route path='/addcourse' component={Addcourse} />
           <Route path='/course/:id' component={Coursedetails} />
+          <Route path='/welcome' component={Welcome} />
         </Switch>
       </div>
     </BrowserRouter>
