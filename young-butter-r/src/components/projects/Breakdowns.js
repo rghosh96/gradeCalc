@@ -85,7 +85,7 @@ const Breakdowns = (props) => {
             </div> : 
             <div>
             <Alert variant="danger" >
-            <b>not enough points! </b>
+            <b>invalid total number of points! </b>
             total running points for course must be out of 100. currently, it is out of only {mcTot}
         </Alert></div> }
             

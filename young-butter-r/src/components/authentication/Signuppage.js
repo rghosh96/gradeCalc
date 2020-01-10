@@ -43,13 +43,13 @@ class Signuppage extends Component {
                     <Col>
                     <Form.Group controlId="firstName">
                         <Form.Label>first name</Form.Label>
-                        <Form.Control type="text" onChange={this.handleInput} placeholder="u ardy kno" />
+                        <Form.Control type="text" onChange={this.handleInput} placeholder="what is your FIRST name?" />
                     </Form.Group>
                     </Col>
                     <Col>
                     <Form.Group controlId="lastName">
                         <Form.Label>last name</Form.Label>
-                        <Form.Control type="text" onChange={this.handleInput} placeholder="iykyk!" />
+                        <Form.Control type="text" onChange={this.handleInput} placeholder="& last name?" />
                     </Form.Group>
                     </Col>
                 </Row>
@@ -63,7 +63,7 @@ class Signuppage extends Component {
 
                 <Form.Group controlId="password">
                     <Form.Label>password</Form.Label>
-                    <Form.Control type="password"onChange={this.handleInput} placeholder="pls enter ur password!" />
+                    <Form.Control type="password"onChange={this.handleInput} placeholder="pls enter a password!" />
                 </Form.Group>
                 <Button variant="pink" type="submit">
                     sign up!

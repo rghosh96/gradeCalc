@@ -38,13 +38,13 @@ class Addcourse extends Component {
                     {/* controId sets both id and htmlFor */}
                     <Form.Group controlId="courseName">
                         <Form.Label>course name</Form.Label>
-                        <Form.Control type="text" onChange={this.handleInput} placeholder="name of course" />
+                        <Form.Control required type="text" onChange={this.handleInput} placeholder="name of course" />
                     </Form.Group>
                     </Col>
                     <Col>
                     <Form.Group controlId="final">
                         <Form.Label>final %</Form.Label>
-                        <Form.Control type="number" onChange={this.handleInput} placeholder="enter a number" />
+                        <Form.Control required type="number" min="0" max="100" onChange={this.handleInput} placeholder="enter a number" />
                     </Form.Group>
                     </Col>
                 </Row>
