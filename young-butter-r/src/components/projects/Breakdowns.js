@@ -75,13 +75,13 @@ const Breakdowns = (props) => {
             <br></br>
 
             { mcTot === 100 ?  
-                <div>total: {mcTot}
-                <div>Your current grade: { total }
+                <div>
+                <h5>Your current grade: { total }</h5>
             <ProgressBar valuemax={A} animated now={total}/>
-            </div>
-            <div>For an A: { wantA }</div>
-            <div>For a B: { wantB }</div>
-            <div>For a C: { wantC }</div>
+            <br></br>
+            <h6>For an A: { wantA }</h6>
+            <h6>For a B: { wantB }</h6>
+            <h6>For a C: { wantC }</h6>
             </div> : 
             <div>
             <Alert variant="danger" >

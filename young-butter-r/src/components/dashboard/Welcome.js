@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 function Welcome() {
   return (
       <Container className="welcome">
-        <Row className="justify-content-center">
+        <Row className="d-flex align-items-start justify-content-center">
             <Col>
             
                 <h1>grade calc</h1>
