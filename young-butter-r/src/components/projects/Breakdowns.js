@@ -12,14 +12,17 @@ import Table from 'react-bootstrap/Table'
 import Alert from 'react-bootstrap/Alert'
 
 const Breakdowns = (props) => {
-    console.log(props)
-    if (props.breakdowns) {
-    var breakdowns = [];
-    for (var key in props.breakdowns) {
-        if (key){
-        breakdowns.push(props.breakdowns[key]);
-        }
-    }
+    console.log(props.breakdowns)
+    var breakdowns = props.breakdowns
+    console.log(breakdowns)
+     if (breakdowns) {
+    // var breakdowns = [];
+    // for (var key in props.breakdowns) {  
+    //     console.log(props.breakdowns[key].key)
+    //     breakdowns.push(props.breakdowns[key]);
+    // }
+
+    
     var final = props.final/100;
     var total = 0;
     var pTotal = 0;
@@ -29,13 +32,13 @@ const Breakdowns = (props) => {
     var C = 70;
     
     console.log(final)
-    for (var i in breakdowns) {
-        if (!null) {
-        console.log(mcTot)
-        pTotal = pTotal + ((breakdowns[i].percent/100));
-        total = total + ((breakdowns[i].percent/100)*(breakdowns[i].score/100));
-        mcTot = mcTot + Number(breakdowns[i].percent);}
-        else {continue}
+        for (var i in props.breakdowns) {
+            if (props.breakdowns[i] !== null){
+                pTotal = pTotal + ((breakdowns[i].percent/100));
+                total = total + ((breakdowns[i].percent/100)*(breakdowns[i].score/100));
+                mcTot = mcTot + Number(breakdowns[i].percent);
+            }
+            else {continue}
     }
 
     total = (total / pTotal)*100;
@@ -59,16 +62,19 @@ const Breakdowns = (props) => {
             </thead>
             <tbody>
             { breakdowns && breakdowns.map(breakdown => {
+                console.log(breakdowns);
+                console.log(breakdown);
+                if (breakdown !== null) {
                 return (
                     /* pass down each course into coursesummary */
-                    <tr key={breakdown.id}>
+                    <tr>
                         <td>{breakdown.type} </td>
                         <td>{breakdown.percent} </td>
                         <td>{breakdown.score} </td>
-                        { console.log(key)}
-                        <td><Button variant="simple" onClick={() => { props.deleteBreakdown(props.userId, props.courseId, key) }}> [delete] </Button></td>
+                        <td><Button variant="simple" onClick={ () => { props.deleteBreakdown(props.userId, props.courseId, breakdown.id) }}> [delete] </Button></td>
                     </tr>
-                )
+                )}
+                else { return (<td>was deleted</td>)}
             })}
             </tbody>
             </Table>
@@ -99,14 +105,10 @@ const mapStateToProps = (state, ownProps) => {
     // identify particular course we are trying to get
     const id = ownProps.courseId;
     // get all courses from database
-    const breakdowns = state.firestore.data.breakdowns;
     const courses = state.firestore.data.courses;
     // get that particular course from db
     const displayedCourse = courses ? courses[id] : null;
-    const displayedBreakdowns = breakdowns ? breakdowns : null;
-    console.log(displayedBreakdowns);
     return {
-        breakdowns: displayedBreakdowns,
         course: displayedCourse
     }
 }
@@ -118,20 +120,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default compose(
-    connect(mapStateToProps,mapDispatchToProps),
-    firestoreConnect(props =>  {
-        return [
-        {
-            collection: 'users',
-            doc: props.userId,
-            subcollections: [
-            { collection: 'courses',
-                doc: props.courseId,
-                subcollections: [
-                    { collection: 'breakdowns' }
-                ],
-            } 
-            ],
-            storeAs: 'breakdowns'
-    }]})
+    connect(mapStateToProps,mapDispatchToProps)
 )(Breakdowns);

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
 import { connect } from 'react-redux'
@@ -9,12 +9,14 @@ import Breakdowns from './Breakdowns.js'
 import { Redirect } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 
-const Coursedetails = (props) => {
-    console.log(props);
-    if (!props.auth.uid) return <Redirect to ='/welcome' />
-    const id = props.match.params.id;
+class Coursedetails extends Component {
+    render() {
+    console.log(this.props);
+    if (!this.props.auth.uid) return <Redirect to ='/welcome' />
+    const id = this.props.match.params.id;
     // destructure to get data from mapStateToProps
-    const { course } = props;
+    const { course, breakdowns } = this.props;
+    console.log(breakdowns)
     
     return (course ? (
         <Container>
@@ -24,7 +26,7 @@ const Coursedetails = (props) => {
                     <Card.Text>
                     <hr></hr>Final percent contribution: { course.final }%</Card.Text>
                     <Addbreakdowns id={ id } />
-                    <Breakdowns userId = {props.auth.uid} courseId={ id } final={ course.final }/>
+                    <Breakdowns userId = {this.props.auth.uid} courseId={ id } final={ course.final } breakdowns={ breakdowns }/>
                 </Card.Body>
             </Card>
         </Container>
@@ -37,6 +39,7 @@ const Coursedetails = (props) => {
 <Spinner animation="grow" variant="info" />
 <Spinner animation="grow" variant="dark" />
   </div>))
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -50,10 +53,12 @@ const mapStateToProps = (state, ownProps) => {
     console.log(courses)
     // get that particular course from db
     const displayedCourse = courses ? courses[id] : null;
+    const breakdowns = state.firestore.ordered.breakdowns;
     // console.log(theBreakdown);
     return {
         course: displayedCourse,
-        auth: state.firebase.auth
+        breakdowns: breakdowns,
+        auth: state.firebase.auth,
     }
 }
 
@@ -71,7 +76,20 @@ export default compose(
                 { collection: 'courses' }
               ],
               storeAs: 'userCourse'
-            }
+            },
+            {
+                collection: 'users',
+                doc: props.auth.uid,
+                subcollections: [
+                { collection: 'courses',
+                    doc: props.match.params.id,
+                    subcollections: [
+                        { collection: 'breakdowns' }
+                    ],
+                } 
+                ],
+                storeAs: 'breakdowns'
+        }
           ]
     } else {
         return [ { collection: 'courses'}]

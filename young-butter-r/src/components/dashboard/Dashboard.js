@@ -18,6 +18,7 @@ class Dashboard extends Component {
 
         // destructure props and store courses object in var called courses
         const { users, auth } = this.props;
+        console.log(users)
 
         // redirect if NOT logged in
         if (!auth.uid) return <Redirect to ='/welcome' />
@@ -69,6 +70,7 @@ export default compose(
               subcollections: [
                 { collection: 'courses' }
               ],
+              // returns the courses collection for a given user 
               storeAs: 'userCourse'
             }
           ]
