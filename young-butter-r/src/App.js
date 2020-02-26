@@ -1,10 +1,31 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Navigation from './components/layout/Navigation.js'
+import Dashboard from './components/dashboard/Dashboard.js'
+import Welcome from './components/dashboard/Welcome.js'
+import Courseslist from './components/projects/Courseslist.js'
+import Coursedetails from './components/projects/Coursedetails.js'
+import Signinpage from './components/authentication/Signinpage.js'
+import Signuppage from './components/authentication/Signuppage.js'
+import Addcourse from './components/projects/Addcourse.js'
 
 function App() {
   return (
-    <div className="App">
-      <h1>grade calculator</h1>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Navigation />
+        <Switch>
+          <Route exact path='/' component={Dashboard} />
+          <Route path='/courses' component={Courseslist} />
+          <Route path='/signin' component={Signinpage} />
+          <Route path='/signup' component={Signuppage} />
+          <Route path='/addcourse' component={Addcourse} />
+          <Route path='/course/:id' component={Coursedetails} />
+          <Route path='/welcome' component={Welcome} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
